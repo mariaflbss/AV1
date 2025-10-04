@@ -67,4 +67,11 @@ export default class Peca implements Salvador, Carregador {
       console.error("Falha ao carregar Peça:", err);
     }
   }
+
+  public detalhes(): void {
+    console.log(`\nPeça: ${this.nome}`);
+    console.log(`- Tipo: ${this.tipo}`);
+    console.log(`- Fornecedor: ${this.fornecedor}`);
+    console.log(`- Status: ${this.status}`);
+  }
 }

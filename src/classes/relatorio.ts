@@ -2,6 +2,7 @@ import Aeronave from "./aeronaves";
 import Peca from "./pecas";
 import Etapa from "./etapa";
 import Teste from "./testes";
+import * as fs from "fs";
 
 export default class Relatorio {
   public gerarRelatorio(
@@ -12,37 +13,42 @@ export default class Relatorio {
     cliente: string,
     dataEntrega: string
   ): string {
-    let texto = `Relatório da Aeronave ${aeronave.getCodigo}\n`;
+    let texto = `Relatório da Aeronave ${aeronave.codigo}\n`;
     texto += `Cliente: ${cliente}\n`;
     texto += `Data de Entrega: ${dataEntrega}\n\n`;
 
     texto += `== Dados da Aeronave ==\n`;
-    texto += `Modelo: ${aeronave.getModelo}\n`;
-    texto += `Tipo: ${aeronave.getTipo}\n`;
-    texto += `Capacidade: ${aeronave.getCapacidade}\n`;
-    texto += `Alcance: ${aeronave.getAlcance}\n\n`;
+    texto += `Código: ${aeronave.codigo}\n`;
+    texto += `Modelo: ${aeronave.modelo}\n`;
+    texto += `Tipo: ${aeronave.tipo}\n`;
+    texto += `Capacidade: ${aeronave.capacidade}\n`;
+    texto += `Alcance: ${aeronave.alcance}\n\n`;
 
     texto += `== Peças Utilizadas ==\n`;
-    for (const p of pecas) {
-      texto += `- Nome: ${p.getNome}, Tipo: ${p.getTipo}, Status: ${p.getStatus}\n`;
-    }
+    pecas.forEach((p) => {
+      texto += `- Nome: ${p.nome}, Tipo: ${p.tipo}, Fornecedor: ${p.fornecedor}, Status: ${p.status}\n`;
+    });
+
     texto += `\n== Etapas Realizadas ==\n`;
-    for (const e of etapas) {
-      texto += `- Etapa: ${e.getNome}, Status: ${e.getStatus}\n`;
-      texto += `  Funcionários: ${e
-        .listarFuncionarios()
-        .map((f) => f.getNome)
-        .join(", ")}\n`;
-    }
+    etapas.forEach((e) => {
+      texto += `- Etapa: ${e.nome}, Prazo: ${e.prazo}, Status: ${e.status}\n`;
+      texto += `  Funcionários: ${e.listarFuncionarios().map(f => f.nome).join(", ") || "Nenhum"}\n`;
+    });
+
     texto += `\n== Resultados dos Testes ==\n`;
-    for (const t of testes) {
-      texto += `- Tipo: ${t.getTipo}, Resultado: ${t.getResultado}\n`;
-    }
+    testes.forEach((t) => {
+      texto += `- Tipo: ${t.tipo}, Resultado: ${t.resultado}\n`;
+    });
 
     return texto;
   }
 
   public salvarEmArquivo(conteudo: string, caminho: string): void {
-    console.log(`Salvar relatório em ${caminho}:\n${conteudo}`);
+    try {
+      fs.writeFileSync(caminho, conteudo, { encoding: "utf-8" });
+      console.log(`Relatório salvo com sucesso em: ${caminho}`);
+    } catch (error) {
+      console.error("Erro ao salvar o relatório:", error);
+    }
   }
 }

@@ -1,10 +1,11 @@
-import { Carregador, Salvador } from "../interfaces"
+import { Salvador, Carregador } from "../interfaces";
 
 export enum TipoTeste {
   ELETRICO = "ELETRICO",
   HIDRAULICO = "HIDRAULICO",
   AERODINAMICO = "AERODINAMICO",
 }
+
 export enum ResultadoTeste {
   APROVADO = "APROVADO",
   REPROVADO = "REPROVADO",
@@ -19,28 +20,25 @@ export default class Teste implements Salvador, Carregador {
     this.resultado = resultado;
   }
 
-  get getTipo(): TipoTeste {
-    return this.tipo;
-  }
-  get getResultado(): ResultadoTeste {
-    return this.resultado;
+  detalhes(): void {
+    console.log(`\nTeste: ${this.tipo}`);
+    console.log(`- Resultado: ${this.resultado === ResultadoTeste.APROVADO ? "Aprovado" : "Reprovado"}`);
   }
 
-  public salvar(): string {
-    const obj = {
+  salvar(): string {
+    return JSON.stringify({
       tipo: this.tipo,
       resultado: this.resultado,
-    };
-    return JSON.stringify(obj);
+    });
   }
 
-  public carregar(linha: string): void {
+  carregar(linha: string): void {
     try {
       const obj = JSON.parse(linha);
       this.tipo = obj.tipo;
       this.resultado = obj.resultado;
     } catch (err) {
-      console.error("Falha ao carregar Teste:", err);
+      console.error("Erro ao carregar Teste:", err);
     }
   }
 }

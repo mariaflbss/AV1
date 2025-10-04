@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/mariaflbss/AV1/issues"
   },
-  "homepage": "https://github.com/mariaflbss/AV1#readme"
+  "homepage": "https://github.com/mariaflbss/AV1#readme",
+  "devDependencies": {
+    "@types/node": "^24.6.2"
+  }
 }

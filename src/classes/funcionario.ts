@@ -31,27 +31,27 @@ export default class Funcionario {
     this.nivelPermissao = nivelPermissao;
   }
 
-  // Getters
-  get getId(): string {
+  // Getters 
+  get Id(): string {
     return this.id;
   }
-  get getNome(): string {
+  get Nome(): string {
     return this.nome;
   }
-  get getTelefone(): string {
+  get Telefone(): string {
     return this.telefone;
   }
-  get getEndereco(): string {
+  get Endereco(): string {
     return this.endereco;
   }
-  get getUsuario(): string {
+  get Usuario(): string {
     return this.usuario;
   }
-  get getNivelPermissao(): NivelPermissao {
+  get NivelPermissao(): NivelPermissao {
     return this.nivelPermissao;
   }
 
-  // Autenticação 
+  // Autenticação do funcionário
   public autenticar(usuario: string, senha: string): boolean {
     return this.usuario === usuario && this.senha === senha;
   }
@@ -63,7 +63,7 @@ export default class Funcionario {
       telefone: this.telefone,
       endereco: this.endereco,
       usuario: this.usuario,
-      senha: this.senha,
+      senha: this.senha, 
       nivelPermissao: this.nivelPermissao,
     };
     return JSON.stringify(obj);
@@ -82,5 +82,13 @@ export default class Funcionario {
     } catch (err) {
       console.error("Falha ao carregar Funcionário:", err);
     }
+  }
+
+  public static autenticar(
+    usuario: string,
+    senha: string,
+    funcionarios: Funcionario[]
+  ): Funcionario | null {
+    return funcionarios.find((f) => f.autenticar(usuario, senha)) || null;
   }
 }

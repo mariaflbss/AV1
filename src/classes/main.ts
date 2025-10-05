@@ -3,7 +3,10 @@ import { cadastrarPeca, atualizarStatusPeca } from "../servicos/pecassevicos";
 import EtapaService from "../servicos/etapaservico";
 import { TesteService } from "../servicos/testesservicos";
 import { FuncionarioService, menuLogin } from "../servicos/funcionarioservicos";
-import { pergunta, rl } from "../entrada";  
+import { pergunta, rl } from "../entrada"; 
+import { associarEtapaAeronave } from "../servicos/associaretapaaeronave";
+import { associarFuncionarioEtapa } from "../servicos/associarfuncionarioetapa";
+import { associarTesteAeronave } from "../servicos/associartesteaeronave";
 
 const funcionarios: any[] = [];
 const funcionarioService = new FuncionarioService(funcionarios);
@@ -57,17 +60,14 @@ async function menuPrincipal(): Promise<void> {
         console.log("Etapa cadastrada com sucesso!");
         break;
       case "7":
-        console.log("Função associarEtapaAeronave não implementada.");
+      await associarEtapaAeronave(aeronaves, etapas);
         break;
       case "8":
-        console.log("Função associarFuncionarioEtapa não implementada.");
-        break;
-      case "9":
-        await testeService.executarTeste();
-        break;
+        await associarFuncionarioEtapa(funcionarios, etapas);
+       break;
       case "10":
-        console.log("Função associarTesteAeronave não implementada.");
-        break;
+        await associarTesteAeronave(aeronaves, testes);
+      break;
       case "11":
         console.log("Saindo...");
         rl.close();

@@ -1,5 +1,6 @@
 import { Carregador, Salvador } from "../interfaces";
 import Etapa from "./etapa";
+import Teste from "./testes"; 
 
 export enum TipoAeronave {
   COMERCIAL = "COMERCIAL",
@@ -21,6 +22,7 @@ export default class Aeronave implements Salvador, Carregador {
   public capacidade: number;
   public alcance: number;
   public etapas: Etapa[] = [];
+  public testes: Teste[] = [];
 
   constructor(
     codigo: string,
@@ -35,6 +37,7 @@ export default class Aeronave implements Salvador, Carregador {
     this.capacidade = capacidade;
     this.alcance = alcance;
     this.etapas = [];
+    this.testes = [];
   }
 
   public detalhes(): void {

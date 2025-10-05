@@ -19,6 +19,7 @@ Sistema em TypeScript para gerenciamento de aeronaves, peças, etapas de produç
 
 2. Instale as dependências:
    npm install
+   npm i --save-dev @types/node
 
 3. Compilar o TypeScript:
     npx tsc

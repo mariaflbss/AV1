@@ -24,6 +24,6 @@ Sistema em TypeScript para gerenciamento de aeronaves, peças, etapas de produç
     npx tsc
 
 4. Execute o projeto:
-    node dist/classes/main.js
+    node ./out/classes/main.js
 
 

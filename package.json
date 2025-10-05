@@ -19,5 +19,8 @@
   "homepage": "https://github.com/mariaflbss/AV1#readme",
   "devDependencies": {
     "@types/node": "^24.6.2"
+  },
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
   }
 }

@@ -10,7 +10,7 @@ export default class Funcionario {
   public telefone: string;
   public endereco: string;
   public usuario: string;
-  private senha: string; 
+  private senha: string;
   public nivelPermissao: NivelPermissao;
 
   constructor(
@@ -51,7 +51,6 @@ export default class Funcionario {
     return this.nivelPermissao;
   }
 
-  // Autenticação do funcionário
   public autenticar(usuario: string, senha: string): boolean {
     return this.usuario === usuario && this.senha === senha;
   }
@@ -82,13 +81,5 @@ export default class Funcionario {
     } catch (err) {
       console.error("Falha ao carregar Funcionário:", err);
     }
-  }
-
-  public static autenticar(
-    usuario: string,
-    senha: string,
-    funcionarios: Funcionario[]
-  ): Funcionario | null {
-    return funcionarios.find((f) => f.autenticar(usuario, senha)) || null;
   }
 }

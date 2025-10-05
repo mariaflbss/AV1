@@ -100,7 +100,7 @@ export default class Etapa {
       status: this.status,
       dataInicio: this.dataInicio,
       dataFim: this.dataFim,
-      funcionarios: this.funcionarios.map(f => f.id)
+      funcionarios: this.funcionarios.map(f => f.id),
     };
     return JSON.stringify(obj);
   }
@@ -115,7 +115,7 @@ export default class Etapa {
       this.dataFim = obj.dataFim;
       this.funcionarios = obj.funcionarios
         .map((id: string) => todosFuncionarios.find(f => f.id === id))
-        .filter(Boolean) as Funcionario[];
+        .filter((f): f is Funcionario => f !== undefined);
     } catch (err) {
       console.error("Erro ao carregar Etapa:", err);
     }

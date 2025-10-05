@@ -1,13 +1,15 @@
-import { Carregador, Salvador } from "../interfaces"
+import { Carregador, Salvador } from "../interfaces";
 
 export enum TipoPeca {
   NACIONAL = "NACIONAL",
   IMPORTADA = "IMPORTADA",
 }
+
 export enum StatusPeca {
   EM_PRODUCAO = "EM_PRODUCAO",
   EM_TRANSPORTE = "EM_TRANSPORTE",
   PRONTA = "PRONTA",
+  INSTALADA = "INSTALADA",
 }
 
 export default class Peca implements Salvador, Carregador {

@@ -22,7 +22,11 @@ export default class Teste implements Salvador, Carregador {
 
   detalhes(): void {
     console.log(`\nTeste: ${this.tipo}`);
-    console.log(`- Resultado: ${this.resultado === ResultadoTeste.APROVADO ? "Aprovado" : "Reprovado"}`);
+    console.log(
+      `- Resultado: ${
+        this.resultado === ResultadoTeste.APROVADO ? "Aprovado" : "Reprovado"
+      }`
+    );
   }
 
   salvar(): string {

@@ -1,4 +1,5 @@
 import { Carregador, Salvador } from "../interfaces";
+import Etapa from "./etapa";
 
 export enum TipoAeronave {
   COMERCIAL = "COMERCIAL",
@@ -19,6 +20,7 @@ export default class Aeronave implements Salvador, Carregador {
   public tipo: TipoAeronave;
   public capacidade: number;
   public alcance: number;
+  public etapas: Etapa[] = [];
 
   constructor(
     codigo: string,
@@ -32,9 +34,9 @@ export default class Aeronave implements Salvador, Carregador {
     this.tipo = tipo;
     this.capacidade = capacidade;
     this.alcance = alcance;
+    this.etapas = [];
   }
 
-  // Metódos
   public detalhes(): void {
     console.log(
       `\nDetalhes da Aeronave ${this.codigo}:
@@ -47,13 +49,14 @@ export default class Aeronave implements Salvador, Carregador {
   }
 
   public salvar(): string {
-    return JSON.stringify({
+    const obj: IAeronaveData = {
       codigo: this.codigo,
       modelo: this.modelo,
       tipo: this.tipo,
       capacidade: this.capacidade,
       alcance: this.alcance,
-    });
+    };
+    return JSON.stringify(obj);
   }
 
   public carregar(linha: string): void {

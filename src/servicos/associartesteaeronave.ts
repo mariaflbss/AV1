@@ -1,28 +1,42 @@
 import { pergunta } from "../entrada";
-import Aeronave from "../classes/aeronaves";
-import Teste from "../classes/testes";
+import Teste from "../classes/testes"; 
 
-export async function associarTesteAeronave(aeronaves: Aeronave[], testes: Teste[]) {
-  if (aeronaves.length === 0 || testes.length === 0) {
-    console.log("Aeronaves ou testes não disponíveis.");
+export async function associarTesteAeronave(aeronaves: any[], testes: Teste[]): Promise<void> {
+  if (aeronaves.length === 0) {
+    console.log("Nenhuma aeronave cadastrada.");
+    return;
+  }
+  if (testes.length === 0) {
+    console.log("Nenhum teste cadastrado.");
     return;
   }
 
-  console.log("\n=== Associar Teste à Aeronave ===");
-  aeronaves.forEach((a, i) => {
-    console.log(`${i + 1}. ${a.modelo}`);
+  console.log("\nLista de Aeronaves:");
+  aeronaves.forEach((aeronave, idx) => {
+    console.log(`${idx + 1} - ${aeronave.modelo} (Código: ${aeronave.codigo})`);
   });
-  const idxAeronave = parseInt(await pergunta("Escolha o número da aeronave: ")) - 1;
-  const aeronave = aeronaves[idxAeronave];
+  const opcaoAeronave = await pergunta("Escolha o número da aeronave: ");
+  const aeronaveSelecionada = aeronaves[parseInt(opcaoAeronave) - 1];
+  if (!aeronaveSelecionada) {
+    console.log("Aeronave inválida.");
+    return;
+  }
 
-  testes.forEach((t, i) => {
-    console.log(`${i + 1}. Teste #${i + 1}`);
+  console.log("\nLista de Testes:");
+  testes.forEach((teste, idx) => {
+    console.log(`${idx + 1} - Tipo: ${teste.tipo} - Resultado: ${teste.resultado}`);
   });
-  const idxTeste = parseInt(await pergunta("Escolha o número do teste: ")) - 1;
-  const teste = testes[idxTeste];
+  const opcaoTeste = await pergunta("Escolha o número do teste: ");
+  const testeSelecionado = testes[parseInt(opcaoTeste) - 1];
+  if (!testeSelecionado) {
+    console.log("Teste inválido.");
+    return;
+  }
 
-  if (!aeronave.testes) aeronave.testes = [];
-  aeronave.testes.push(teste);
+  if (!aeronaveSelecionada.testes) {
+    aeronaveSelecionada.testes = [];
+  }
 
-  console.log(`Teste associado à aeronave '${aeronave.modelo}'.`);
+  aeronaveSelecionada.testes.push(testeSelecionado);
+  console.log(`Teste associado à aeronave ${aeronaveSelecionada.modelo} com sucesso.`);
 }

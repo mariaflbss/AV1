@@ -32,7 +32,11 @@ export default class Relatorio {
     texto += `\n== Etapas Realizadas ==\n`;
     etapas.forEach((e) => {
       texto += `- Etapa: ${e.nome}, Prazo: ${e.prazo}, Status: ${e.status}\n`;
-      texto += `  Funcionários: ${e.listarFuncionarios().map(f => f.nome).join(", ") || "Nenhum"}\n`;
+      const funcionarios = e.listarFuncionarios();
+      const nomes = funcionarios.length > 0
+        ? funcionarios.map(f => f.nome).join(", ")
+        : "Nenhum";
+      texto += `  Funcionários: ${nomes}\n`;
     });
 
     texto += `\n== Resultados dos Testes ==\n`;

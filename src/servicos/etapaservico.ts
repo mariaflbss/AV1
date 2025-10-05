@@ -1,9 +1,4 @@
-import { pergunta } from "../entrada";
-
-interface Etapa {
-  nome: string;
-  prazo: string;
-}
+import Etapa from "../classes/etapa";
 
 export default class EtapaService {
   private etapas: Etapa[];
@@ -13,6 +8,7 @@ export default class EtapaService {
   }
 
   cadastrarEtapa(nome: string, prazo: string): void {
-    this.etapas.push({ nome, prazo });
+    const etapa = new Etapa(nome, prazo);  
+    this.etapas.push(etapa);
   }
 }

@@ -71,7 +71,7 @@ export async function menuLogin(funcionarios: Funcionario[]): Promise<void> {
   const funcionario = service.autenticarUsuario(usuario, senha);
 
   if (funcionario) {
-    console.log(`Bem-vindo, ${funcionario.nome}!`);
+    console.log(`Bem-vindo(a), ${funcionario.nome}!`);
   } else {
     console.log("Usuário ou senha inválidos.");
   }
